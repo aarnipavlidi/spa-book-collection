@@ -1,0 +1,31 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Backend for the project.",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server:dev": "env-cmd -f .env.development nodemon server.js",
+    "server:prod": "env-cmd -f .env.production node server.js",
+    "dev": "concurrently \"npm run server:dev\" \"cd ../client && npm start\"",
+    "start": "concurrently \"npm run server:prod\" \"cd ../client && npm start\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aarnipavlidi/spa-book-collection"
+  },
+  "author": "Aarni Pavlidi",
+  "license": "ISC",
+  "dependencies": {
+    "@graphql-tools/schema": "^9.0.16",
+    "apollo-server": "^3.11.1",
+    "concurrently": "^7.6.0",
+    "env-cmd": "^10.1.0",
+    "graphql": "^16.6.0",
+    "lodash.merge": "^4.6.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
