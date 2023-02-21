@@ -1,0 +1,10 @@
+# Frontend
+/client/node_modules
+/client/.env.development
+/client/.env.production
+/client/graphql.schema.json
+
+# Backend
+/server/node_modules
+/server/.env.development
+/server/.env.production
