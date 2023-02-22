@@ -8,8 +8,7 @@ const Navigation: React.FC = () => {
           <h1 className="font-pier-sans text-2xl">Books Collection</h1>
         </div>
         <ul className="basis-1/2 flex flex-row gap-5">
-          <Page label="Homepage" path="/" />
-          <Page label="Error page" path="/error" />
+          <Page label="Our books" path="/" />
         </ul>
       </nav>
     </header>
