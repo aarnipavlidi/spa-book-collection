@@ -10,6 +10,7 @@ const typeDefs = gql`
 
   type Query {
     getCurrentBooks: [Books]
+    getBookByID(id: Int!): Books
   }
 `
 
