@@ -12,7 +12,7 @@ export const GET_CURRENT_BOOKS = gql(`
 `);
 
 export const GET_BOOK_BY_ID = gql(`
-  query getBookByID($id: Int!) {
+  query getBookByID($id: String!) {
     getBookByID(id: $id) {
       id
       title
