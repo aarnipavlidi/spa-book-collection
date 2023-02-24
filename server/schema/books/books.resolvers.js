@@ -1,3 +1,4 @@
+import crypto from 'crypto';
 import currentBooksData from "../../utils/mockData.js";
 
 const resolvers = {
@@ -31,6 +32,38 @@ const resolvers = {
       } catch (error) {
         throw error
       };
+    }
+  },
+  Mutation: {
+    createNewBook: async (_, { title, author, description }) => {
+      try {
+
+        if (!title || !author || !description) {
+          throw new Error('One of the fields are missing. Please check missing fields and try again!')
+        }
+
+        const getCurrentBooksAmount = currentBooksData.length;
+        const randomID = crypto.randomBytes(16).toString('hex');
+        
+        const newBook = {
+          id: randomID,
+          title: title,
+          author: author,
+          description: description
+        };
+
+        const updateDatabase = currentBooksData.push(newBook);
+
+        if (getCurrentBooksAmount === updateDatabase) {
+          throw new Error('There was an issue while adding book into collection. Please try again later!')
+        }
+
+        return {
+          message: 'You have successfully added book into our collection!',
+        }
+      } catch (error) {
+        throw error;
+      }
     }
   }
 }

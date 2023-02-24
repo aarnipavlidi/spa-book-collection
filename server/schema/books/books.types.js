@@ -1,8 +1,12 @@
 import { gql } from 'apollo-server';
 
 const typeDefs = gql`
+  type Response {
+    message: String!
+  }
+
   type Books {
-    id: Int!
+    id: String!
     title: String!
     author: String!
     description: String!
@@ -10,7 +14,11 @@ const typeDefs = gql`
 
   type Query {
     getCurrentBooks: [Books]
-    getBookByID(id: Int!): Books
+    getBookByID(id: String!): Books
+  }
+
+  type Mutation {
+    createNewBook(title: String, author: String, description: String): Response
   }
 `
 

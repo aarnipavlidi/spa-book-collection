@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 interface BookItemProps {
-  id?: number;
+  id?: string;
   title?: string;
   author?: string;
 }
