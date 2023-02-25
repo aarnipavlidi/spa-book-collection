@@ -66,8 +66,9 @@ const Book: React.FC = () => {
   };
 
   return (
-    <div className="container mx-auto px-5 py-10 basis-1/2">
+    <div data-cy="formMainContainer" className="container mx-auto px-5 py-10 basis-1/2">
       <Notification
+        id="notificationMainContainer"
         styling="p-4 mb-4"
         defaultLabel="Please add new book into collection."
         notification={notificationMessage}
@@ -107,7 +108,7 @@ const Book: React.FC = () => {
         inputUpdate={(value: string) => setDescriptionValue(value)}
         inputRows={4}
       />
-      <div className="flex justify-start">
+      <div data-cy="buttonMainContainer" className="flex justify-start">
         <Button
           label="Save New"
           buttonStyling="mt-5 mr-3"
