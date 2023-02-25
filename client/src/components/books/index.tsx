@@ -11,7 +11,7 @@ interface BooksProps {
 const Books: React.FC<BooksProps> = ({ currentBooks, loadingBooks }) => {
 
   return (
-    <section className="container mx-auto px-5 py-10">
+    <section data-cy="booksSectionMainContainer" className="container mx-auto px-5 py-10">
       <table className="table-auto container">
         <thead>
           <tr>
