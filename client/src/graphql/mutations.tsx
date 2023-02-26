@@ -7,3 +7,11 @@ export const CREATE_NEW_BOOK = gql(`
     }
   }
 `);
+
+export const DELETE_OLD_BOOK = gql(`
+  mutation deleteOldBook($id: String!) {
+    deleteOldBook(id: $id) {
+      message
+    }
+  }
+`);

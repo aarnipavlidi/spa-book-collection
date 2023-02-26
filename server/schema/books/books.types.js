@@ -19,6 +19,7 @@ const typeDefs = gql`
 
   type Mutation {
     createNewBook(title: String, author: String, description: String): Response
+    deleteOldBook(id: String!): Response
   }
 `
 

@@ -6,7 +6,6 @@ import Books from '../books';
 
 interface LayoutProps {
   currentBooks: GetCurrentBooksQuery | undefined;
-  loadingBooks: boolean;
 }
 
 const Layout: React.FC<LayoutProps> = (props) => {
@@ -17,7 +16,6 @@ const Layout: React.FC<LayoutProps> = (props) => {
         <Outlet />
         <Books
           currentBooks={props.currentBooks}
-          loadingBooks={props.loadingBooks}
         />
       </main>
     </>

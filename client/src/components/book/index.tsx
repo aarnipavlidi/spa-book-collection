@@ -1,13 +1,14 @@
 /* eslint-disable no-magic-numbers */
 import { notificationProps } from '../../types/hooks/notification.props';
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import Notification from '../notification';
 import ContainerInput from './container.input';
 import Button from '../button';
 
 import useCreateNewBook from '../../hooks/useCreateNewBook';
+import useDeleteOldBook from '../../hooks/useDeleteOldBook';
 import useGetBookByID from '../../hooks/useGetBookByID';
 
 const Book: React.FC = () => {
@@ -17,10 +18,12 @@ const Book: React.FC = () => {
   const [descriptionValue, setDescriptionValue] = useState<string>('');
 
   const params = useParams();
+  const navigate = useNavigate();
   const getCurrentID = params.id ? params.id : '';
 
   const { bookData } = useGetBookByID(getCurrentID);
   const { createBookDatabase, createBookLoading } = useCreateNewBook();
+  const { deleteBookDatabase, deleteBookLoading } = useDeleteOldBook(getCurrentID);
 
   useEffect(() => {
     setTitleValue('');
@@ -47,6 +50,45 @@ const Book: React.FC = () => {
             status: true,
           });
         }, 5000);
+      }
+
+      return null;
+    } catch (error: any) {
+      setNotificationMessage({
+        message: error.message as string,
+        status: false,
+      });
+
+      setTimeout(() => {
+        setNotificationMessage({
+          message: '',
+          status: true,
+        });
+      }, 5000);
+    }
+  };
+
+  const handleDeleteOldBook = async () => {
+    try {
+      const response = await deleteBookDatabase({ id: getCurrentID });
+      setTitleValue('');
+      setAuthorValue('');
+      setDescriptionValue('');
+
+      if (response.data?.deleteOldBook) {
+        setNotificationMessage({
+          message: response.data.deleteOldBook.message,
+          status: true,
+        });
+
+        setTimeout(() => {
+          setNotificationMessage({
+            message: '',
+            status: true,
+          });
+        }, 5000);
+
+        navigate('/');
       }
 
       return null;
@@ -115,6 +157,15 @@ const Book: React.FC = () => {
           onClick={handleCreateNewBook}
           buttonLoading={createBookLoading}
           disabled={!!bookData}
+          iconName="arrow-path"
+          iconStyling="aspect-ratio h-6 w-6 mx-1"
+        />
+        <Button
+          label="Delete"
+          buttonStyling="mt-5 mr-3"
+          onClick={handleDeleteOldBook}
+          buttonLoading={deleteBookLoading}
+          disabled={!bookData}
           iconName="arrow-path"
           iconStyling="aspect-ratio h-6 w-6 mx-1"
         />

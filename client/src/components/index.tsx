@@ -7,12 +7,12 @@ import Error from './error';
 import useGetCurrentBooks from '../hooks/useGetCurrentBooks';
 
 const Main: React.FC = () => {
-  const { booksData, booksLoading } = useGetCurrentBooks();
+  const { booksData } = useGetCurrentBooks();
 
   return (
     <div className="bg-slate-100 min-h-screen">
       <Routes>
-        <Route path="/" element={<Layout currentBooks={booksData} loadingBooks={booksLoading} />}>
+        <Route path="/" element={<Layout currentBooks={booksData} />}>
           <Route index path="/" element={<Book />} />
           <Route path="/:id" element={<Book />} />
           <Route path="*" element={<Error />} />
