@@ -15,6 +15,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
 const documents = {
     "\n  mutation createNewBook($title: String, $author: String, $description: String) {\n    createNewBook(title: $title, author: $author, description: $description) {\n      message\n    }\n  }\n": types.CreateNewBookDocument,
     "\n  mutation deleteOldBook($id: String!) {\n    deleteOldBook(id: $id) {\n      message\n    }\n  }\n": types.DeleteOldBookDocument,
+    "\n  mutation updateOldBook($id: String!, $title: String, $author: String, $description: String) {\n    updateOldBook(id: $id, title: $title, author: $author, description: $description) {\n      message\n    }\n  }\n": types.UpdateOldBookDocument,
     "\n  query getCurrentBooks {\n    getCurrentBooks {\n      id\n      title\n      author\n      description\n    }\n  }\n": types.GetCurrentBooksDocument,
     "\n  query getBookByID($id: String!) {\n    getBookByID(id: $id) {\n      id\n      title\n      author\n      description\n    }\n  }\n": types.GetBookByIdDocument,
 };
@@ -41,6 +42,10 @@ export function gql(source: "\n  mutation createNewBook($title: String, $author:
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  mutation deleteOldBook($id: String!) {\n    deleteOldBook(id: $id) {\n      message\n    }\n  }\n"): (typeof documents)["\n  mutation deleteOldBook($id: String!) {\n    deleteOldBook(id: $id) {\n      message\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation updateOldBook($id: String!, $title: String, $author: String, $description: String) {\n    updateOldBook(id: $id, title: $title, author: $author, description: $description) {\n      message\n    }\n  }\n"): (typeof documents)["\n  mutation updateOldBook($id: String!, $title: String, $author: String, $description: String) {\n    updateOldBook(id: $id, title: $title, author: $author, description: $description) {\n      message\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
