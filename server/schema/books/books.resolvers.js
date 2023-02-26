@@ -94,6 +94,32 @@ const resolvers = {
       } catch (error) {
         throw error;
       }
+    },
+    updateOldBook: async (_, { id, title, author, description }) => {
+      try {
+        const currentBookIndex = currentBooksData.findIndex((book) => book.id === id);
+
+        if (!id | !title | !author | !description) {
+          throw new Error('There was an issue while trying to update book in the collection. Please try again later!');
+        }
+
+        if (currentBookIndex !== -1) {
+          currentBooksData[currentBookIndex] = {
+            ...currentBooksData[currentBookIndex],
+            title: title,
+            author: author,
+            description: description,
+          };
+
+          return {
+            message: 'You have successfully updated current book in the collection!',
+          }
+        } else {
+          throw new Error('There was an issue while trying to update book in the collection. Please try again later!');
+        }
+      } catch (error) {
+        throw error;
+      }
     }
   }
 }

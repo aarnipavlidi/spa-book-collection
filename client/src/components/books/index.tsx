@@ -12,7 +12,7 @@ interface BooksProps {
 const Books: React.FC<BooksProps> = ({ currentBooks }) => {
 
   return (
-    <section className="container mx-auto px-5 py-10">
+    <section data-cy="booksSectionMainContainer" className="container mx-auto px-5 py-10">
       {
         (currentBooks?.getCurrentBooks === undefined || currentBooks?.getCurrentBooks?.length === 0) && <>
           <div>

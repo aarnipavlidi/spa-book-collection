@@ -15,3 +15,11 @@ export const DELETE_OLD_BOOK = gql(`
     }
   }
 `);
+
+export const UPDATE_OLD_BOOK = gql(`
+  mutation updateOldBook($id: String!, $title: String, $author: String, $description: String) {
+    updateOldBook(id: $id, title: $title, author: $author, description: $description) {
+      message
+    }
+  }
+`);

@@ -10,6 +10,7 @@ import Button from '../button';
 import useCreateNewBook from '../../hooks/useCreateNewBook';
 import useDeleteOldBook from '../../hooks/useDeleteOldBook';
 import useGetBookByID from '../../hooks/useGetBookByID';
+import useUpdateOldBook from '../../hooks/useUpdateOldBook';
 
 const Book: React.FC = () => {
   const [notificationMessage, setNotificationMessage] = useState<notificationProps>({ message: '', status: true });
@@ -24,6 +25,7 @@ const Book: React.FC = () => {
   const { bookData } = useGetBookByID(getCurrentID);
   const { createBookDatabase, createBookLoading } = useCreateNewBook();
   const { deleteBookDatabase, deleteBookLoading } = useDeleteOldBook(getCurrentID);
+  const { updateBookDatabase, updateBookLoading } = useUpdateOldBook();
 
   useEffect(() => {
     setTitleValue('');
@@ -107,6 +109,50 @@ const Book: React.FC = () => {
     }
   };
 
+  const handleUpdateOldBook = async () => {
+    try {
+      const response = await updateBookDatabase({
+        id: getCurrentID,
+        title: titleValue || bookData?.getBookByID?.title,
+        author: authorValue || bookData?.getBookByID?.author,
+        description: descriptionValue || bookData?.getBookByID?.description,
+      });
+      setTitleValue('');
+      setAuthorValue('');
+      setDescriptionValue('');
+
+      if (response.data?.updateOldBook) {
+        setNotificationMessage({
+          message: response.data.updateOldBook.message,
+          status: true,
+        });
+
+        setTimeout(() => {
+          setNotificationMessage({
+            message: '',
+            status: true,
+          });
+        }, 5000);
+
+        navigate('/');
+      }
+
+      return null;
+    } catch (error: any) {
+      setNotificationMessage({
+        message: error.message as string,
+        status: false,
+      });
+
+      setTimeout(() => {
+        setNotificationMessage({
+          message: '',
+          status: true,
+        });
+      }, 5000);
+    }
+  };
+
   return (
     <div data-cy="formMainContainer" className="container mx-auto px-5 py-10 basis-1/2">
       <Notification
@@ -152,6 +198,7 @@ const Book: React.FC = () => {
       />
       <div data-cy="buttonMainContainer" className="flex justify-start">
         <Button
+          id="saveBookButton"
           label="Save New"
           buttonStyling="mt-5 mr-3"
           onClick={handleCreateNewBook}
@@ -161,6 +208,17 @@ const Book: React.FC = () => {
           iconStyling="aspect-ratio h-6 w-6 mx-1"
         />
         <Button
+          id="updateBookButton"
+          label="Save"
+          buttonStyling="mt-5 mr-3"
+          onClick={handleUpdateOldBook}
+          buttonLoading={updateBookLoading}
+          disabled={!bookData}
+          iconName="arrow-path"
+          iconStyling="aspect-ratio h-6 w-6 mx-1"
+        />
+        <Button
+          id="deleteBookButton"
           label="Delete"
           buttonStyling="mt-5 mr-3"
           onClick={handleDeleteOldBook}

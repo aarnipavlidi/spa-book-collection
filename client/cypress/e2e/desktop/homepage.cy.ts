@@ -104,7 +104,7 @@ describe('Testing Book Collection homepage.', () => {
       .should('eq', '/');
 
     cy.get('[data-cy="buttonMainContainer"] > button')
-      .should('have.length', 1)
+      .should('have.length', 2)
       .first()
       .should('be.visible')
       .should('have.attr', 'type', 'button')
@@ -224,5 +224,31 @@ describe('Testing Book Collection homepage.', () => {
           .and('have.text', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Laoreet non curabitur gravida arcu ac tortor dignissim. Gravida neque convallis a cras semper auctor neque vitae.')
           .and('be.visible');
       });
+  });
+
+  it('Testing books delete', () => {
+    cy.location('pathname').should('eq', '/');
+
+    cy.get('[data-cy="booksSectionMainContainer"] > table')
+      .within(() => {
+        cy.get('tbody > tr')
+          .first()
+          .children()
+          .should('have.length', 2)
+          .first()
+          .click();
+      });
+
+    cy.get('[data-cy="deleteBookButton"]')
+      .should('have.length', 1)
+      .and('not.be.disabled')
+      .and('have.text', 'Delete')
+      .click();
+
+    cy.get('[data-cy="notificationMainContainer"]')
+      .should('have.text', 'You have successfully deleted book from the collection!')
+      .and('have.class', 'text-green-900 bg-green-50')
+      .and('be.visible')
+      .and('have.attr', 'role', 'alert');
   });
 });
