@@ -152,6 +152,7 @@ const Book: React.FC = () => {
       />
       <div data-cy="buttonMainContainer" className="flex justify-start">
         <Button
+          id="saveBookButton"
           label="Save New"
           buttonStyling="mt-5 mr-3"
           onClick={handleCreateNewBook}
@@ -161,6 +162,7 @@ const Book: React.FC = () => {
           iconStyling="aspect-ratio h-6 w-6 mx-1"
         />
         <Button
+          id="deleteBookButton"
           label="Delete"
           buttonStyling="mt-5 mr-3"
           onClick={handleDeleteOldBook}

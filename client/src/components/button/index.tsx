@@ -7,6 +7,7 @@ interface IconProps {
 }
 
 interface ButtonProps extends IconProps {
+  id?: string;
   variant?: 'primary';
   label: string;
   buttonStyling?: string;
@@ -15,11 +16,11 @@ interface ButtonProps extends IconProps {
   disabled?: boolean;
 }
 
-const Button: React.FC<ButtonProps> = ({ variant = 'primary', label, buttonStyling, onClick, buttonLoading, disabled, iconName, iconStyling }) => {
+const Button: React.FC<ButtonProps> = ({ id, variant = 'primary', label, buttonStyling, onClick, buttonLoading, disabled, iconName, iconStyling }) => {
   return (
     <>
       {
-        variant === 'primary' && <button type="button" disabled={disabled} className={`${'p-2 border-solid border-2 rounded-lg border-slate-500 bg-slate-300 disabled:opacity-50'} ${buttonStyling}`} onClick={onClick}>
+        variant === 'primary' && <button data-cy={id} type="button" disabled={disabled} className={`${'p-2 border-solid border-2 rounded-lg border-slate-500 bg-slate-300 disabled:opacity-50'} ${buttonStyling}`} onClick={onClick}>
           <span className="font-pier-sans flex flex-row text-md">
             {
               iconName && buttonLoading && <>
