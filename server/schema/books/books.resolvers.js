@@ -64,6 +64,36 @@ const resolvers = {
       } catch (error) {
         throw error;
       }
+    },
+    deleteOldBook: async (_, { id }) => {
+      try {
+        const checkBookExist = currentBooksData.find((book) => book.id === id);
+        const getCurrentBooksAmount = currentBooksData.length;
+
+        if(!id) {
+          throw new Error('There was an issue while trying to delete book from the collection. Please try again later!')
+        }
+
+        if (!checkBookExist) {
+          throw new Error('There was an issue while trying to delete book from the collection. Please try again later!')
+        }
+
+        const getCurrentBook = currentBooksData.findIndex((book) => book.id === id);
+
+        if (getCurrentBook > -1) {
+          currentBooksData.splice(getCurrentBook, 1)
+        }
+
+        if ((getCurrentBooksAmount - currentBooksData.length) !== 1) {
+          throw new Error('There was an issue while trying to delete book from the collection. Please try again later!')
+        }
+
+        return {
+          message: 'You have successfully deleted book from the collection!',
+        }
+      } catch (error) {
+        throw error;
+      }
     }
   }
 }

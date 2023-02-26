@@ -33,7 +33,7 @@ const useCreateNewBook = (): useCreateNewBookProps => {
       });
 
       return response;
-    } catch (error: any) {
+    } catch (error) {
       throw error;
     }
   };
