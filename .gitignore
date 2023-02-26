@@ -6,5 +6,3 @@
 
 # Backend
 /server/node_modules
-/server/.env.development
-/server/.env.production
